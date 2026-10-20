@@ -22,10 +22,13 @@ export default function AppTabs() {
       <TabList asChild>
         <CustomTabList>
           <TabTrigger name="home" href="/" asChild>
-            <TabButton>Home</TabButton>
+            <TabButton>Atelier</TabButton>
           </TabTrigger>
           <TabTrigger name="explore" href="/explore" asChild>
-            <TabButton>Explore</TabButton>
+            <TabButton>Commissions</TabButton>
+          </TabTrigger>
+          <TabTrigger name="default-form" href="/default-form" asChild>
+            <TabButton>Default Form</TabButton>
           </TabTrigger>
         </CustomTabList>
       </TabList>
@@ -35,6 +38,7 @@ export default function AppTabs() {
 
 export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
   return (
+    // @ts-expect-error Expo router slot props ref mismatch with React 19 Pressable
     <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
       <ThemedView
         type={isFocused ? 'backgroundSelected' : 'backgroundElement'}
@@ -55,21 +59,10 @@ export function CustomTabList(props: TabListProps) {
     <View {...props} style={styles.tabListContainer}>
       <ThemedView type="backgroundElement" style={styles.innerContainer}>
         <ThemedText type="smallBold" style={styles.brandText}>
-          Expo Starter
+          Maison Crumb
         </ThemedText>
 
         {props.children}
-
-        <ExternalLink href="https://docs.expo.dev" asChild>
-          <Pressable style={styles.externalPressable}>
-            <ThemedText type="link">Docs</ThemedText>
-            <SymbolView
-              tintColor={colors.text}
-              name={{ ios: 'arrow.up.right.square', web: 'link' }}
-              size={12}
-            />
-          </Pressable>
-        </ExternalLink>
       </ThemedView>
     </View>
   );
